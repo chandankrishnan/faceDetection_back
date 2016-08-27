@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "cloudinary": "^1.4.1",
     "easyimage": "^2.1.0",
     "express": "^4.14.0",
     "multiparty": "^4.1.2",

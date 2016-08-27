@@ -5,7 +5,6 @@
 let express = require('express'),
     app = express(),
     multiparty = require('multiparty'),
-    cloudinary = require('cloudinary'),
     cv = require('opencv'),
     bodyParser = require('body-parser');
 
