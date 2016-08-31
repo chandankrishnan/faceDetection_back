@@ -4,12 +4,29 @@
  */
 let express = require('express'),
     app = express(),
+    http = require('http').Server(app),
     multiparty = require('multiparty'),
     cv = require('opencv'),
+    reqq=require('request'),
     bodyParser = require('body-parser');
+    io = require('socket.io')(http),
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+/**
+ * socket connection on
+ */
+io.on('connection', function(socket) {
+    console.log('a user connected to server');
+socket.on("frame",function(){
+    console.log("socket emiit");
+    socket.emit("frame","data");
+})
+});
+
+ app.get('/d',function(req,res){
+    res.send("hello")
+ })
 
 /**
  * demo
@@ -72,6 +89,6 @@ app.post('/demo', function(req, res) {
     });
 });
 
-app.listen(8088, function() {
-    console.log("runnning");
+http.listen(8088, function() {
+    console.log("runnning ");
 })
