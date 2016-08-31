@@ -20,7 +20,7 @@ io.on('connection', function(socket) {
     console.log('a user connected to server');
 socket.on("frame",function(){
     console.log("socket emiit");
-    socket.emit("frame","data");
+    socket.emit("data","data");
 })
 });
 
