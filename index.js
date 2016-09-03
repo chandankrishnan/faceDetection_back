@@ -8,6 +8,7 @@ let express = require('express'),
     multiparty = require('multiparty'),
     cv = require('opencv'),
     reqq=require('request'),
+    port=8089,
     bodyParser = require('body-parser');
     io = require('socket.io')(http),
 
@@ -16,17 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * socket connection on
  */
-io.on('connection', function(socket) {
-    console.log('a user connected to server');
-socket.on("frame",function(){
-    console.log("socket emiit");
-    socket.emit("data","data");
-})
-});
 
- app.get('/d',function(req,res){
-    res.send("hello")
- })
+io.on('connection', require('./lib/routes/socket'));
 
 /**
  * demo
@@ -34,12 +26,12 @@ socket.on("frame",function(){
  * @param      {String} --password 
  * @return     {String} --send response string as "correct"
  */
-app.post('/', function(req, res) {
-    let user = req.body.username;
-    let password = req.body.password;
-    console.log("user " + user);
-    res.send("correct");
-})
+// app.post('/', function(req, res) {
+//     let user = req.body.username;
+//     let password = req.body.password;
+//     console.log("user " + user);
+//     res.send("correct");
+// })
 
 /**
  * upload image and face detect
@@ -89,6 +81,6 @@ app.post('/demo', function(req, res) {
     });
 });
 
-http.listen(8088, function() {
-    console.log("runnning ");
+http.listen(port, function() {
+    console.log("runnning on :"+port );
 })
