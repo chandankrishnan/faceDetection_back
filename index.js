@@ -1,37 +1,22 @@
 /**
  * define module
- * @module  express,app,multiparty,faced,body-parser
+ * @module  express,app,multiparty,faced,body-parser,opencv,socket.io,http
  */
 let express = require('express'),
     app = express(),
     http = require('http').Server(app),
     multiparty = require('multiparty'),
     cv = require('opencv'),
-    reqq=require('request'),
-    port=8089,
-    bodyParser = require('body-parser');
-    io = require('socket.io')(http),
+    port = 8089,
+    bodyParser = require('body-parser'),
+    io = require('socket.io')(http);
 
-app.use(bodyParser.json());
+    app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * socket connection on
  */
-
 io.on('connection', require('./lib/routes/socket'));
-
-/**
- * demo
- * @param      {String} --user
- * @param      {String} --password 
- * @return     {String} --send response string as "correct"
- */
-// app.post('/', function(req, res) {
-//     let user = req.body.username;
-//     let password = req.body.password;
-//     console.log("user " + user);
-//     res.send("correct");
-// })
 
 /**
  * upload image and face detect
@@ -82,5 +67,5 @@ app.post('/demo', function(req, res) {
 });
 
 http.listen(port, function() {
-    console.log("runnning on :"+port );
+    console.log("runnning on :" + port);
 })
