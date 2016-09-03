@@ -11,7 +11,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     io = require('socket.io')(http);
 
-    app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * socket connection on
